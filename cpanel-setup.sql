@@ -1,8 +1,8 @@
 -- EaseArena Database Setup for cPanel
--- Run these SQL commands in your cPanel PostgreSQL or through phpPgAdmin
+-- Run these SQL commands in your cPanel MySQL or through phpMyAdmin
 
 -- Create database (if not already created through cPanel interface)
--- CREATE DATABASE easearena_db;
+-- CREATE DATABASE elijwoow_easearena_db;
 
 -- Connect to your database and run these table creation commands:
 

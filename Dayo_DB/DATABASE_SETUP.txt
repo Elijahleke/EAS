@@ -15,10 +15,10 @@ DATABASE CONTENTS:
 - Match schedules and user stats
 
 SETUP STEPS:
-1. Create PostgreSQL database: easearena_db
-2. Run: psql -d easearena_db -f easearena-database-export.sql
+1. Create MySQL database: elijwoow_easearena_db
+2. Import myadmin_db.sql through phpMyAdmin
 3. Set DATABASE_URL in your .env file
 4. Your tournament platform is ready!
 
 EXAMPLE CONNECTION:
-DATABASE_URL=postgresql://user:pass@host:5432/easearena_db
+DATABASE_URL=mysql://elijwoow_user:password@localhost:3306/elijwoow_easearena_db

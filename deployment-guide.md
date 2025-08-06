@@ -14,7 +14,7 @@ Your EaseArena application has been built and is ready for deployment. Here are 
 ### 2. Required Environment Variables
 Create a `.env` file on your server with these variables:
 ```
-DATABASE_URL=postgresql://username:password@host:port/database
+DATABASE_URL=mysql://username:password@host:port/elijwoow_easearena_db
 SESSION_SECRET=your-random-secret-key-here
 PGHOST=your-postgres-host
 PGPORT=5432
@@ -29,18 +29,18 @@ REPLIT_DOMAINS=yourdomain.com
 ## Database Setup for cPanel
 
 ### Option 1: PostgreSQL on cPanel (if available)
-1. **Create PostgreSQL Database**
+1. **Create MySQL Database**
    - Login to cPanel
-   - Go to "PostgreSQL Databases"
-   - Create database: `easearena_db`
-   - Create user: `easearena_user`
+   - Go to "MySQL Databases"
+   - Create database: `elijwoow_easearena_db`
+   - Create user: `elijwoow_user`
    - Assign user to database with all privileges
 
 2. **Get Connection Details**
    - Host: Usually `localhost` or your domain
    - Port: Usually `5432`
-   - Database: `easearena_db`
-   - Username: `easearena_user`
+   - Database: `elijwoow_easearena_db`
+   - Username: `elijwoow_user`
    - Password: (what you set)
 
 ### Option 2: External PostgreSQL (Recommended)
