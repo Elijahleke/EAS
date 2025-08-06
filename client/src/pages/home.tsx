@@ -38,8 +38,8 @@ export default function Home() {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
-          <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent-purple rounded-lg flex items-center justify-center mx-auto mb-4">
-            <span className="text-white font-bold text-lg">E</span>
+          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center mx-auto mb-4">
+            <span className="text-primary-foreground font-bold text-lg">E</span>
           </div>
           <p className="text-muted-foreground">Loading...</p>
         </div>

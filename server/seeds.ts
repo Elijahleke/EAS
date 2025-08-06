@@ -176,6 +176,7 @@ export async function seedDatabase() {
         participant1Id: "participant-tournament-2-player-1",
         participant2Id: "participant-tournament-2-player-5", 
         round: 1,
+        matchNumber: 1,
         bracket: "winners",
         scheduledFor: new Date(currentDate.getTime() + 2 * 60 * 60 * 1000), // 2 hours from now
         status: "scheduled" as const
@@ -186,6 +187,7 @@ export async function seedDatabase() {
         participant1Id: "participant-tournament-2-player-11",
         participant2Id: "participant-tournament-2-player-15",
         round: 1,
+        matchNumber: 2,
         bracket: "winners", 
         scheduledFor: new Date(currentDate.getTime() + 3 * 60 * 60 * 1000), // 3 hours from now
         status: "scheduled" as const

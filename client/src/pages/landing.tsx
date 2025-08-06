@@ -3,21 +3,21 @@ import { Card, CardContent } from "@/components/ui/card";
 
 export default function Landing() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gaming-dark-850 via-gaming-dark-900 to-primary/20">
+    <div className="min-h-screen bg-gradient-to-br from-background via-card to-primary/10">
       {/* Header */}
-      <nav className="bg-gaming-dark-850 border-b border-gaming-dark-700">
+      <nav className="bg-card border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent-purple rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">E</span>
+              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                <span className="text-primary-foreground font-bold text-lg">E</span>
               </div>
-              <span className="text-xl font-bold text-white">EaseArena</span>
+              <span className="text-xl font-bold text-foreground">EaseArena</span>
             </div>
             
             <Button 
               onClick={() => window.location.href = '/api/login'}
-              className="gaming-button"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground"
               data-testid="button-login"
             >
               Login
@@ -30,18 +30,18 @@ export default function Landing() {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+            <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
               Welcome to the{" "}
-              <span className="text-gaming-gradient">Ultimate Arena</span>
+              <span className="text-primary">Ultimate Arena</span>
             </h1>
-            <p className="text-xl text-gaming-dark-300 mb-8 max-w-3xl mx-auto">
+            <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
               Create, manage, and compete in esports tournaments. Connect with players worldwide, 
               stream your matches, and climb the leaderboards.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
                 onClick={() => window.location.href = '/api/login'}
-                className="gaming-button"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground"
                 size="lg"
                 data-testid="button-get-started"
               >
@@ -50,7 +50,7 @@ export default function Landing() {
               <Button 
                 variant="outline" 
                 size="lg"
-                className="gaming-button-outline"
+                className="border-border text-foreground hover:bg-muted"
                 data-testid="button-learn-more"
               >
                 Learn More

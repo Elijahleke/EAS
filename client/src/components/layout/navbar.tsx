@@ -16,16 +16,16 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="bg-gaming-dark-850 border-b border-gaming-dark-700 sticky top-0 z-50">
+    <nav className="bg-card border-b border-border sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center space-x-2">
             <a href="/" className="flex items-center space-x-2" data-testid="link-home">
-              <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent-purple rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">E</span>
+              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                <span className="text-primary-foreground font-bold text-lg">E</span>
               </div>
-              <span className="text-xl font-bold text-white">EaseArena</span>
+              <span className="text-xl font-bold text-foreground">EaseArena</span>
             </a>
           </div>
 
@@ -38,7 +38,7 @@ export default function Navbar() {
                 className={`font-medium transition-colors ${
                   link.active 
                     ? "text-primary" 
-                    : "text-gaming-dark-300 hover:text-white"
+                    : "text-muted-foreground hover:text-foreground"
                 }`}
                 data-testid={`link-${link.label.toLowerCase()}`}
               >
@@ -51,7 +51,7 @@ export default function Navbar() {
           <div className="flex items-center space-x-4">
             {/* Mobile menu button */}
             <button
-              className="md:hidden p-2 text-gaming-dark-300 hover:text-white transition-colors"
+              className="md:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               data-testid="button-mobile-menu"
             >
@@ -64,7 +64,7 @@ export default function Navbar() {
                 <Button 
                   variant="ghost" 
                   size="sm" 
-                  className="p-2 text-gaming-dark-300 hover:text-white"
+                  className="p-2 text-muted-foreground hover:text-foreground"
                   data-testid="button-notifications"
                 >
                   <Bell className="w-5 h-5" />
@@ -74,7 +74,7 @@ export default function Navbar() {
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className="p-0" data-testid="button-user-menu">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-accent-cyan to-primary flex items-center justify-center">
+                      <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
                         {user.profileImageUrl ? (
                           <img 
                             src={user.profileImageUrl} 
@@ -82,7 +82,7 @@ export default function Navbar() {
                             className="w-full h-full rounded-full object-cover"
                           />
                         ) : (
-                          <span className="text-white text-sm font-medium">
+                          <span className="text-primary-foreground text-sm font-medium">
                             {user.username?.[0]?.toUpperCase() || user.firstName?.[0]?.toUpperCase() || 'U'}
                           </span>
                         )}
@@ -111,7 +111,7 @@ export default function Navbar() {
             ) : (
               <Button 
                 onClick={() => window.location.href = '/api/login'}
-                className="gaming-button"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground"
                 data-testid="button-login"
               >
                 Login
@@ -122,7 +122,7 @@ export default function Navbar() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-gaming-dark-700 py-4">
+          <div className="md:hidden border-t border-border py-4">
             <div className="flex flex-col space-y-2">
               {navLinks.map((link) => (
                 <a
@@ -131,7 +131,7 @@ export default function Navbar() {
                   className={`block px-3 py-2 font-medium transition-colors ${
                     link.active 
                       ? "text-primary" 
-                      : "text-gaming-dark-300 hover:text-white"
+                      : "text-muted-foreground hover:text-foreground"
                   }`}
                   onClick={() => setMobileMenuOpen(false)}
                   data-testid={`mobile-link-${link.label.toLowerCase()}`}
