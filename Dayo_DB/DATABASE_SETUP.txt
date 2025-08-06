@@ -1,0 +1,24 @@
+DAYO DATABASE SETUP
+==================
+
+This folder contains your complete EaseArena database:
+
+FILES:
+- easearena-database-export.sql (complete database with all data)
+- cpanel-setup.sql (table structure only)
+
+DATABASE CONTENTS:
+- 21 Users (including your account)
+- 4 Games (FIFA, Call of Duty, Rocket League, Valorant)
+- 4 Teams with members
+- 3 Active tournaments
+- Match schedules and user stats
+
+SETUP STEPS:
+1. Create PostgreSQL database: easearena_db
+2. Run: psql -d easearena_db -f easearena-database-export.sql
+3. Set DATABASE_URL in your .env file
+4. Your tournament platform is ready!
+
+EXAMPLE CONNECTION:
+DATABASE_URL=postgresql://user:pass@host:5432/easearena_db

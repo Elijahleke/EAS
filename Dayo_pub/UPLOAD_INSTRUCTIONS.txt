@@ -1,0 +1,23 @@
+DAYO PUBLIC HTML FILES
+======================
+
+Upload these files to your public_html folder:
+
+1. index.html (main page)
+2. assets/index-CKF7hNDU.css (stylesheet)  
+3. assets/index-etYd2Bwa.js (JavaScript)
+
+FOLDER STRUCTURE:
+public_html/
+├── index.html
+└── assets/
+    ├── index-CKF7hNDU.css
+    └── index-etYd2Bwa.js
+
+SETUP:
+1. Create PostgreSQL database
+2. Run SQL from Dayo_DB folder
+3. Set DATABASE_URL in .env file
+4. Your EaseArena site will be live!
+
+See deployment-guide.md for detailed steps.
