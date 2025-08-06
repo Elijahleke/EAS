@@ -1,0 +1,70 @@
+Build a scalable web app called **EaseArena** — a modern tournament management and esports platform.
+
+### Tech Stack
+- Frontend: React (with TailwindCSS), TypeScript
+- Backend: Node.js (Express)
+- Database: PostgreSQL or Firebase (flexible schema for user data, fixtures, teams)
+- Auth: Firebase Auth or Auth0 (support Google, Discord, Twitch)
+- Hosting: Vercel or AWS
+- Real-time features: WebSockets (or Firebase Realtime), for live chat and notifications
+
+### Core Features:
+1. **User System**
+   - Register/login via email or OAuth (Google, Twitch, Discord)
+   - User profiles with stats, teams, tournaments, friends list
+
+2. **Tournament System**
+   - Create/join tournaments (single/double elimination, round-robin)
+   - Fixture generator and bracket logic
+   - Match scheduling with reminders
+   - Assign owners and co-owners (from participants)
+   - Per-fixture Twitch/YT embed for live match viewing
+
+3. **Streaming Integration**
+   - Users can link Twitch/YouTube to their profiles
+   - Embed player shows up next to live fixtures
+   - Archive past match replays
+
+4. **Teams**
+   - Users can create/join teams
+   - Team profiles, logos, stats, members
+   - Team-based tournaments
+
+5. **Regions**
+   - Region-based tournament filters (Europe, Asia, etc.)
+   - Region-specific leaderboards
+
+6. **Community**
+   - Platform-wide forum (Reddit/Discord style)
+   - Each tournament has its own chat room
+   - Match-based chats
+
+7. **Friend System**
+   - Add/remove friends
+   - Direct message and notifications
+
+8. **AI Integration (Mock/Planned)**
+   - Post-match analysis based on match data
+   - Player performance insights and recommendations
+   - Opponent breakdown and trends (mock with dummy data for now)
+
+9. **Admin/Owner Controls**
+   - Organizer dashboards
+   - Report system for match disputes
+   - Control panel for editing tournament info
+
+10. **Mobile-First PWA**
+    - Fully responsive
+    - Installable experience via PWA
+
+### Optional Advanced Features (Phase 4/5):
+- Public API for game devs
+- OBS overlay tools
+- Discord bot integration
+- Partner Portal
+- In-app purchases or premium plans
+
+### Note:
+- Scaffold the project in modular folders for frontend and backend
+- Include mock data where external APIs aren't implemented yet (e.g., match results)
+- Provide simple seed data for users, teams, and fixtures
