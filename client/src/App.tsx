@@ -12,6 +12,8 @@ import TournamentDetail from "@/pages/tournament-detail";
 import CreateTournament from "@/pages/create-tournament";
 import Teams from "@/pages/teams";
 import Profile from "@/pages/profile";
+import Leaderboard from "@/pages/leaderboard";
+import Games from "@/pages/games";
 
 function Router() {
   const { isAuthenticated, isLoading } = useAuth();
@@ -28,6 +30,8 @@ function Router() {
           <Route path="/tournaments/:id" component={TournamentDetail} />
           <Route path="/teams" component={Teams} />
           <Route path="/profile" component={Profile} />
+          <Route path="/leaderboard" component={Leaderboard} />
+          <Route path="/games" component={Games} />
         </>
       )}
       <Route component={NotFound} />

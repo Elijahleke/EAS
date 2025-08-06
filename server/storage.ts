@@ -7,6 +7,7 @@ import {
   matches,
   chatMessages,
   userStats,
+  games,
   type User,
   type UpsertUser,
   type Tournament,
@@ -20,6 +21,8 @@ import {
   type ChatMessage,
   type InsertChatMessage,
   type UserStats,
+  type Game,
+  type InsertGame,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, desc, and, or, sql, count } from "drizzle-orm";
@@ -69,6 +72,14 @@ export interface IStorage {
   getTournamentChat(tournamentId: string, limit?: number): Promise<any[]>;
   getMatchChat(matchId: string, limit?: number): Promise<any[]>;
   createChatMessage(message: InsertChatMessage): Promise<ChatMessage>;
+
+  // Games and leaderboards
+  getGames(): Promise<Game[]>;
+  getGame(id: string): Promise<Game | undefined>;
+  createGame(game: InsertGame): Promise<Game>;
+  getGlobalLeaderboard(gameType?: string): Promise<any[]>;
+  getFriendsLeaderboard(userId: string): Promise<any[]>;
+  getTournamentsByGame(gameType: string): Promise<Tournament[]>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -482,6 +493,55 @@ export class DatabaseStorage implements IStorage {
       .values(messageData)
       .returning();
     return message;
+  }
+
+  // Games and leaderboard operations
+  async getGames(): Promise<Game[]> {
+    return await db.select().from(games).where(eq(games.isActive, true)).orderBy(games.name);
+  }
+
+  async getGame(id: string): Promise<Game | undefined> {
+    const [game] = await db.select().from(games).where(eq(games.id, id));
+    return game;
+  }
+
+  async createGame(gameData: InsertGame): Promise<Game> {
+    const [game] = await db.insert(games).values(gameData).returning();
+    return game;
+  }
+
+  async getGlobalLeaderboard(gameType?: string): Promise<any[]> {
+    let query = db
+      .select({
+        user: users,
+        stats: userStats,
+        game: games,
+      })
+      .from(userStats)
+      .innerJoin(users, eq(userStats.userId, users.id))
+      .innerJoin(games, eq(userStats.gameId, games.id));
+
+    if (gameType) {
+      query = query.where(eq(games.type, gameType as any));
+    }
+
+    return await query
+      .orderBy(desc(userStats.totalPoints))
+      .limit(100);
+  }
+
+  async getFriendsLeaderboard(userId: string): Promise<any[]> {
+    // For now, return empty - would need friends table to implement
+    return [];
+  }
+
+  async getTournamentsByGame(gameType: string): Promise<Tournament[]> {
+    return await db
+      .select()
+      .from(tournaments)
+      .where(eq(tournaments.gameType, gameType as any))
+      .orderBy(desc(tournaments.createdAt))
+      .limit(50);
   }
 }
 

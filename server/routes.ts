@@ -322,6 +322,52 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Games routes
+  app.get("/api/games", async (req, res) => {
+    try {
+      const games = await storage.getGames();
+      res.json(games);
+    } catch (error) {
+      console.error("Error fetching games:", error);
+      res.status(500).json({ message: "Failed to fetch games" });
+    }
+  });
+
+  // Leaderboard routes
+  app.get("/api/leaderboard/global", async (req, res) => {
+    try {
+      const { game } = req.query;
+      const leaderboard = await storage.getGlobalLeaderboard(game as string);
+      res.json(leaderboard);
+    } catch (error) {
+      console.error("Error fetching global leaderboard:", error);
+      res.status(500).json({ message: "Failed to fetch leaderboard" });
+    }
+  });
+
+  app.get("/api/leaderboard/friends", isAuthenticated, async (req, res) => {
+    try {
+      const userId = req.user?.claims?.sub;
+      const leaderboard = await storage.getFriendsLeaderboard(userId);
+      res.json(leaderboard);
+    } catch (error) {
+      console.error("Error fetching friends leaderboard:", error);
+      res.status(500).json({ message: "Failed to fetch friends leaderboard" });
+    }
+  });
+
+  // Enhanced tournament routes with game types
+  app.get("/api/tournaments/by-game/:gameType", async (req, res) => {
+    try {
+      const { gameType } = req.params;
+      const tournaments = await storage.getTournamentsByGame(gameType);
+      res.json(tournaments);
+    } catch (error) {
+      console.error("Error fetching tournaments by game:", error);
+      res.status(500).json({ message: "Failed to fetch tournaments" });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

@@ -8,6 +8,12 @@ EaseArena is a modern tournament management and esports platform built for compe
 
 Preferred communication style: Simple, everyday language.
 
+## Business Context
+- Domain: easearena.com (already owned)
+- Social Media: @easeArena on X, TikTok, Instagram, Twitch; @easearena1 on YouTube
+- Competition targets: BracketHQ, Battlefy, Challonge, Toornament, TourneyMachine, VirtualProGaming
+- Goal: Build a comprehensive multi-sport tournament platform to supersede existing competitors
+
 ## System Architecture
 
 ### Frontend Architecture

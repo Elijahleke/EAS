@@ -60,6 +60,11 @@ export const tournamentFormatEnum = pgEnum('tournament_format', [
   'swiss'
 ]);
 
+export const gameTypeEnum = pgEnum('game_type', [
+  'fifa', 'nba2k', 'rocket_league', 'cod', 'valorant', 'fortnite', 
+  'apex_legends', 'csgo', 'dota2', 'lol', 'overwatch', 'pubg'
+]);
+
 export const tournaments = pgTable("tournaments", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   name: varchar("name").notNull(),
@@ -74,6 +79,11 @@ export const tournaments = pgTable("tournaments", {
   endDate: timestamp("end_date"),
   region: varchar("region"),
   gameTitle: varchar("game_title"),
+  gameType: gameTypeEnum("game_type").notNull().default('fifa'),
+  entryFee: integer("entry_fee").default(0),
+  requiresApproval: boolean("requires_approval").default(false),
+  isPublic: boolean("is_public").default(true),
+  streamingRequired: boolean("streaming_required").default(false),
   organizedBy: varchar("organized_by").notNull().references(() => users.id),
   bannerUrl: varchar("banner_url"),
   rules: text("rules"),
@@ -145,17 +155,7 @@ export const chatMessages = pgTable("chat_messages", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-export const userStats = pgTable("user_stats", {
-  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
-  userId: varchar("user_id").notNull().references(() => users.id, { onDelete: 'cascade' }),
-  tournamentsWon: integer("tournaments_won").default(0),
-  tournamentsParticipated: integer("tournaments_participated").default(0),
-  matchesWon: integer("matches_won").default(0),
-  matchesLost: integer("matches_lost").default(0),
-  totalEarnings: integer("total_earnings").default(0),
-  ranking: integer("ranking"),
-  updatedAt: timestamp("updated_at").defaultNow(),
-});
+// userStats table moved below to comprehensive definition with game support
 
 // Relations
 export const userRelations = relations(users, ({ many, one }) => ({
@@ -246,11 +246,48 @@ export const chatMessageRelations = relations(chatMessages, ({ one }) => ({
   }),
 }));
 
+// Games/Sports system
+export const games = pgTable("games", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  name: varchar("name").notNull(),
+  type: gameTypeEnum("type").notNull(),
+  description: text("description"),
+  imageUrl: varchar("image_url"),
+  isActive: boolean("is_active").default(true),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+// User statistics and leaderboards
+export const userStats = pgTable("user_stats", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").references(() => users.id, { onDelete: 'cascade' }),
+  gameId: varchar("game_id").references(() => games.id, { onDelete: 'cascade' }),
+  totalMatches: integer("total_matches").default(0),
+  matchesWon: integer("matches_won").default(0),
+  matchesLost: integer("matches_lost").default(0),
+  matchesDraw: integer("matches_draw").default(0),
+  winRate: integer("win_rate").default(0), // percentage
+  ranking: integer("ranking"),
+  winPoints: integer("win_points").default(0),
+  participationPoints: integer("participation_points").default(0),
+  totalPoints: integer("total_points").default(0),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
 export const userStatsRelations = relations(userStats, ({ one }) => ({
   user: one(users, {
     fields: [userStats.userId],
     references: [users.id],
   }),
+  game: one(games, {
+    fields: [userStats.gameId],
+    references: [games.id],
+  }),
+}));
+
+export const gameRelations = relations(games, ({ many }) => ({
+  tournaments: many(tournaments),
+  userStats: many(userStats),
 }));
 
 // Insert schemas
@@ -297,3 +334,5 @@ export type InsertMatch = z.infer<typeof insertMatchSchema>;
 export type ChatMessage = typeof chatMessages.$inferSelect;
 export type InsertChatMessage = z.infer<typeof insertChatMessageSchema>;
 export type UserStats = typeof userStats.$inferSelect;
+export type Game = typeof games.$inferSelect;
+export type InsertGame = typeof games.$inferInsert;

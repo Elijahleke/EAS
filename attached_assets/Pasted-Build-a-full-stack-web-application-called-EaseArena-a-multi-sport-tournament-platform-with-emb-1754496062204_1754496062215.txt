@@ -1,0 +1,93 @@
+Build a full-stack web application called **EaseArena** — a multi-sport tournament platform with embedded streaming, real-time fixtures, team management, and gamification.
+
+### Tech Stack:
+- Frontend: React (with TailwindCSS), TypeScript
+- Backend: Node.js (Express)
+- Database: PostgreSQL or Firebase
+- Auth: Firebase Auth or Auth0 (with Google, Discord, Twitch OAuth)
+- Hosting: Vercel or AWS
+- Real-time: WebSockets or Firebase Realtime DB (for live chat, notifications)
+
+---
+
+### CORE FEATURES
+
+1. **Authentication + Test Accounts**
+   - Temporary login for:
+     - 1 admin account
+     - Players 1 to 20 (pre-seeded test users)
+   - Auth via email/password for these accounts
+   - OAuth (Google, Discord, Twitch) ready for production
+
+2. **Tournament System**
+   - Create tournament with name, game/sport, format, start date
+   - Invite users by username or email
+   - Registration closes automatically when tournament starts
+   - Tournament creator = `Owner`, can assign `Co-owner` (from participants)
+   - Only Owner/Co-owner can update fixture scores
+   - Option to require a **paid entry fee** (with dummy payment setup or mock)
+   - Visible status: `Open`, `Pending`, `In Progress`, `Completed`
+
+3. **Fixture Management + Standings Table**
+   - Fixtures are auto-generated (single/double elimination or round-robin)
+   - Each fixture displays: team names, time, result, and “Watch Live” (if stream is active)
+   - For round-robin/league-based tournaments, generate a **game table** with:
+     - P (Played), W (Wins), D (Draws), L (Losses), GF (Goals For), GA (Goals Against), GD (Goal Difference), Pts (Points)
+   - For non-sports games (e.g., FPS), adjust columns (Kills, Deaths, etc.)
+
+4. **Teams & Sports**
+   - Players can create or select teams
+   - Team structure follows:
+     - Country → League → Division → Club
+   - Users may create custom team names (e.g., “FC Ultimate Team”, “Ghost Gamers”)
+   - Support for multiple sports: FIFA, NBA2K, Rocket League, COD, etc.
+   - Game/sport selected at tournament creation controls rules/stats logic
+
+5. **Streaming Integration**
+   - Players link Twitch or YouTube
+   - “Watch Live” appears next to fixture when streaming is live
+   - Embedded player in the match view (no need to leave EaseArena)
+   - Past streams archived to player/team profiles
+
+6. **Chat & Community**
+   - Each tournament has its own chat room
+   - Each fixture has a mini live chat
+   - Global community space (Reddit/Discord style forum)
+   - Friend system: Add/remove friends, direct message
+
+7. **Leaderboards + Gamification**
+   - Global Leaderboard: rank by Win Points and Participation Points
+   - Friend Leaderboard: see how you rank among friends
+   - Earn XP/Points:
+     - +5 points per match played
+     - +10 points per match won
+     - +3 points per draw
+   - Points help unlock badges, visibility, or future rewards (mocked for now)
+
+8. **Admin Panel**
+   - Manage tournaments, users, reported disputes
+   - View platform stats (total users, matches, streams)
+   - Manage categories and sports types
+
+---
+
+### SEED DATA REQUIREMENTS
+
+- Create dummy users:
+  - admin@easearena.com / password: Admin123!
+  - player1@easearena.com → player20@easearena.com / password: Player123!
+
+- Include:
+  - 2 sample tournaments (one in FIFA, one in COD)
+  - Pre-filled fixtures, some with scores, some open
+  - Pre-filled teams and country/league structures
+  - One tournament with registration still open
+  - One tournament with registration closed and games started
+
+---
+
+### Bonus Notes:
+- Use modular folders: `/auth`, `/tournaments`, `/teams`, `/fixtures`, `/leaderboard`, `/chat`
+- Include basic UI for each feature (doesn’t have to be pretty)
+- Use dummy data or mocks where real APIs are not available
+- Comment your code to show where Phase 2–5 features can plug in

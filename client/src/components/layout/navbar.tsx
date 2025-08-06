@@ -11,8 +11,8 @@ export default function Navbar() {
   const navLinks = [
     { href: "/tournaments", label: "Tournaments", active: window.location.pathname.startsWith("/tournaments") },
     { href: "/teams", label: "Teams", active: window.location.pathname === "/teams" },
-    { href: "#", label: "Streams", active: false },
-    { href: "#", label: "Community", active: false },
+    { href: "/games", label: "Games", active: window.location.pathname === "/games" },
+    { href: "/leaderboard", label: "Leaderboard", active: window.location.pathname === "/leaderboard" },
   ];
 
   return (
