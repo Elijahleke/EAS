@@ -1,0 +1,37 @@
+EASEARENA SIMPLE UPLOAD GUIDE
+=============================
+
+PROBLEM: Build errors on server
+SOLUTION: Static file deployment (no build needed)
+
+STEP 1: UPLOAD FILES
+-------------------
+From your cPanel File Manager or FTP:
+
+1. Go to public_html/ folder
+2. Upload these files:
+   - index.html
+   - assets/ folder (contains CSS and JS)
+
+Your structure should look like:
+public_html/
+├── index.html
+└── assets/
+    ├── index-CKF7hNDU.css
+    └── index-etYd2Bwa.js
+
+STEP 2: IMPORT DATABASE
+----------------------
+1. Open phpMyAdmin in cPanel
+2. Create database: elijwoow_easearena_db
+3. Import file: elijwoow_easearena_db.sql
+
+STEP 3: VISIT YOUR SITE
+----------------------
+Go to: https://easearena.com
+Your tournament platform will load with all features!
+
+NO NODE.JS OR BUILD COMMANDS NEEDED
+Just upload files and import database.
+
+Total upload size: ~650KB (very fast upload)
